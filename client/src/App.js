@@ -1,32 +1,27 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Grid, Navbar, Nav, NavItem, Jumbotron, Button } from 'react-bootstrap';
 
 class App extends Component {
-  getData() {
-   return fetch(`artists`, {
-    accept: 'application/json',
-  }).then(async function (response) {
-      const result = await response.text();
-      console.log(result);
-    });
-  }
-
-  componentDidMount() {
-    this.getData();
-  }
-
   render() {
-    this.getData();
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+         <Navbar inverse fixedTop>
+            <Navbar.Header>
+              <Navbar.Brand>
+                <a href="/">Rap Stats</a>
+              </Navbar.Brand>
+              <Nav>
+                <NavItem eventKey={1} href="#">Add artist</NavItem>
+                <NavItem eventKey={2} href="#">Add song</NavItem>
+              </Nav>
+            </Navbar.Header>
+        </Navbar>
+        <Jumbotron>
+        <Grid>
+          <h1>Raps meets raps</h1>
+        </Grid>
+      </Jumbotron>
       </div>
     );
   }
