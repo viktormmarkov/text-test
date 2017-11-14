@@ -7,6 +7,14 @@ function getArtists(req, res) {
     });
 }
 
+function getArtist(req, res) {
+    const {id} = req.params;
+    Artist.findById(id).then(function (artist) {
+        res.send(artist);
+    });
+}
+
 module.exports = function (rootApp) {
+    rootApp.get('/artists/:id', getArtist);    
     rootApp.get('/artists', getArtists);
 }
