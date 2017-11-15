@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Grid, Button } from 'react-bootstrap';
+import { Route, Switch, Link } from 'react-router-dom'
 
-class Artists extends Component {
+class AllArtists extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -20,7 +21,6 @@ class Artists extends Component {
       this.setState({artists});
     })
   }
-  
   render() {
     const {artists} = this.state;
     const artistList = artists.map((artist, i) => (
@@ -43,9 +43,25 @@ class Artists extends Component {
             {artistList}
           </tbody>
         </table>
-        <Button>Add Artist</Button>
-        
+        <Button><Link to="/artists/add">Add Artist</Link></Button>
       </div>
+    )
+  }
+}
+
+const AddArtist = () => (
+  <div>
+    <h1>Add artist</h1>
+    <Button><Link to="/artists">Add Artist</Link></Button>
+  </div>
+)
+class Artists extends Component {
+  render() {
+    return (
+      <Switch>
+         <Route exact path='/artists' component={AllArtists}/>
+         <Route path='/artists/add' component={AddArtist}/>
+      </Switch>
     );
   }
 }
