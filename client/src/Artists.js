@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Button, FormControl, FormGroup, ControlLabel, HelpBlock} from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Route, Switch, Link } from 'react-router-dom';
 import AddArtist from './AddArtist';
 import artistService from './services/artists';
@@ -13,11 +13,16 @@ class AllArtists extends Component {
   }
 
   async getArtists() {
-    artistService.query()
+    return await artistService.query()
       .then(artists => {
         this.setState({artists});
       });
   }
+
+  async removeArtist(artist) {
+    return await artistService.remove(artist._id);
+  }
+
   componentDidMount() {
     this.getArtists();
   }
@@ -25,8 +30,12 @@ class AllArtists extends Component {
     const {artists} = this.state;
     const artistList = artists.map((artist, i) => (
       <tr key={artist._id}>
-       <td>{artist.name}</td>
-       <td>{artist._id}</td>
+        <td>{artist.name}</td>
+        <td>{artist._id}</td>
+        <td>
+          <Button bsSize="small" onClick={() => this.removeArtist(artist)}>Remove</Button>
+          <Button bsSize="small"><Link to={`/artists/${artist._id}`}>Edit</Link></Button>
+        </td>
       </tr>
     ));
     return (
@@ -37,6 +46,7 @@ class AllArtists extends Component {
             <tr>
             <td>Name</td>
             <td>ID</td>
+            <td></td>
             </tr>
           </thead>
           <tbody>
@@ -54,6 +64,7 @@ class Artists extends Component {
       <Switch>
          <Route exact path='/artists' component={AllArtists}/>
          <Route path='/artists/add' component={AddArtist}/>
+         <Route path='/artists/:_id' component={AddArtist}/>
       </Switch>
     );
   }

@@ -2,7 +2,6 @@ const Artist = require('./artist')
 
 function getArtists(req, res) {
     Artist.find({}).then(function (artists) {
-        console.log(artists);
         res.send(artists);
     });
 }
@@ -24,6 +23,17 @@ function addArtist(req, res) {
     });
 }
 
+function updateArtist(req, res) {
+    const id = req.params.id;
+    const update = req.body;
+    return Artist.update({_id: id}, update, function(err, data) {
+        if(err) {
+            console.log(err, 'errorr');
+        }
+        res.send(data); 
+    });
+}
+
 function deleteArtist(req, res) {
     const id = req.params.id;
     return Artist.remove({_id: id}, function (err, data) {
@@ -35,7 +45,8 @@ function deleteArtist(req, res) {
 }
 
 module.exports = function (rootApp) {
-    rootApp.get('/artists/:id', getArtist);    
+    rootApp.get('/artists/:id', getArtist);
+    rootApp.put('/artists/:id', updateArtist);    
     rootApp.delete('/artists/:id', deleteArtist);    
     rootApp.get('/artists', getArtists);
     rootApp.post('/artists', addArtist);

@@ -1,43 +1,58 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Button, FormControl, FormGroup, ControlLabel, HelpBlock} from 'react-bootstrap';
-import { Route, Switch, Link } from 'react-router-dom'
+import { Button, FormControl, FormGroup, ControlLabel} from 'react-bootstrap';
+import { Route, Link } from 'react-router-dom';
+import artistService from './services/artists';
 
 class AddArtist extends Component {
   constructor(props) {
     super(props);
+    const _id = props.match.params._id;    
     this.state = {
-      name: ''
+      name: '',
+      _id
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    console.log(event.target.value);
     this.setState({name: event.target.value});
   }
 
-  handleSubmit(event) {
-    this.addArtist();
-    event.preventDefault();
+  componentDidMount() {
+    const {_id} = this.state;
+    if (_id) {
+      artistService.get(_id).then(artist => this.setState({name: artist.name}));
+    }    
   }
 
-  addArtist() {
+  handleSubmit(event) {
+    event.preventDefault();
+    const {_id} = this.state;
+    
+    if (!_id) {
+      this.addArtist();
+    } else {
+      this.updateArtist()
+    }
+  }
+
+  async addArtist() {
     const name = this.state.name || '';
-    fetch('/artists', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({name})
-    });
+    return artistService.add({name});
+  }
+
+  async updateArtist() {
+    const name = this.state.name || '';
+    const _id = this.state._id;
+    return artistService.update({name, _id});
   }
 
   render() {
+    const {_id} = this.state;
     return (
       <div>
-      <h1>Add artist</h1>
+      <h1>{ _id ? 'Edit artist' : 'Add artist' }</h1>
       <form onSubmit={this.handleSubmit}>
         <FormGroup
           controlId="formBasicText"
@@ -51,7 +66,7 @@ class AddArtist extends Component {
             onChange={this.handleChange}
           />
         </FormGroup>
-        <Button type="submit">Add</Button>
+        <Button type="submit">{ _id ? 'Update' : 'Add' }</Button>
       </form>
       </div>
     )
