@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import artistService from './services/artists';
+import _ from 'lodash';
 
 class ArtistsList extends Component {
   constructor(props){
@@ -19,7 +20,8 @@ class ArtistsList extends Component {
   }
 
   async removeArtist(artist) {
-    return await artistService.remove(artist._id);
+    await artistService.remove(artist._id);
+    this.getArtists();
   }
 
   componentDidMount() {

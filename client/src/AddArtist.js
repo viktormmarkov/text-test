@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, FormControl, FormGroup, ControlLabel} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import artistService from './services/artists';
 
 class AddArtist extends Component {
@@ -25,15 +26,16 @@ class AddArtist extends Component {
     }    
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
     const {_id} = this.state;
     
     if (!_id) {
-      this.addArtist();
+      await this.addArtist();
     } else {
-      this.updateArtist()
+      await this.updateArtist()
     }
+    this.props.history.push('/artists')
   }
 
   async addArtist() {
