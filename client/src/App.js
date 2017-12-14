@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Grid, Navbar, Nav, NavItem, Jumbotron, Button } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom'
+import { Grid, Navbar, Nav, NavItem } from 'react-bootstrap';
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import Songs from './Songs';
 import Artists from './Artists';
 import Home from './Home';

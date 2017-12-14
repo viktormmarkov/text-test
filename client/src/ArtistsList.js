@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
-import { Route, Switch, Link } from 'react-router-dom';
-import AddArtist from './AddArtist';
+import { Link } from 'react-router-dom';
 import artistService from './services/artists';
 
 class ArtistsList extends Component {
