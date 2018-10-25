@@ -63,3 +63,4 @@ _cache
 bower_components
 jsconfig.json
 yarn.lock
+**/*.txt
