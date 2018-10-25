@@ -64,3 +64,4 @@ bower_components
 jsconfig.json
 yarn.lock
 **/*.txt
+lz77.js
