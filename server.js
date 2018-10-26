@@ -1,15 +1,15 @@
-const wordcount = require('./wordcount');
-const fs = require('fs');
-const _ = require('lodash');
 const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const db = mongoose.connection;
-const artists = require('./models/artistController');
+const artists = require("./models/artistController");
+const songs = require('./models/songController');
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 artists(app);
+songs(app);
 
 mongoose.connect('mongodb://localhost/rapstats');
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button, FormControl, FormGroup, ControlLabel} from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import artistService from './services/artists';
 
 class AddArtist extends Component {

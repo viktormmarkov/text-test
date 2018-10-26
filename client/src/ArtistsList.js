@@ -54,7 +54,7 @@ class ArtistsList extends Component {
             {artistList}
           </tbody>
         </table>
-        <Button><Link to="/artists/add">Add Artist</Link></Button>
+        <Link to="/artists/add">Add Artist</Link>
       </div>
     )
   }
