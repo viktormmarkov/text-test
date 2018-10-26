@@ -46,6 +46,6 @@ class ArtistService {
     }
 }
 
-const artistService = new ArtistService;
+const artistService = new ArtistService();
 
 export default artistService;
