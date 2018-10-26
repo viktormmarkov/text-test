@@ -3,13 +3,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const db = mongoose.connection;
-const artists = require("./models/artistController");
-const songs = require('./models/songController');
-
+const controllers = require('./controllers');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-artists(app);
-songs(app);
+
+controllers.initControllers(app);
 
 mongoose.connect('mongodb://localhost/rapstats');
 

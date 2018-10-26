@@ -1,4 +1,4 @@
-const Artist = require('./artist')
+const Artist = require('../models/artist')
 
 function getArtists(req, res) {
     Artist.find({}).then(function (artists) {

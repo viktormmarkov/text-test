@@ -1,4 +1,4 @@
-const Song = require('./song')
+const Song = require('../models/song')
 
 function getSongs(req, res) {
     Song.find({}).then(function (songs) {
